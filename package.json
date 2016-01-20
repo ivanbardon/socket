@@ -1,0 +1,15 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "description": "test for socket connection",
+  "main": "app.js",
+  "scripts": {
+    "test": "start"
+  },
+  "author": "ivan",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.13.3",
+    "socket.io": "^1.4.4"
+  }
+}
