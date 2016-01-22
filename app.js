@@ -4,11 +4,11 @@ var io = require('socket.io')(http);
 
 app.set('view engine','jade');
 
-app.get('/chat', function(req, res){
-  res.sendFile(__dirname + '/index.html');
+app.get('/', function(req, res){
+	res.render('index');
 });
 
-app.get('/', function(req, res){
+app.get('/chat', function(req, res){
 	res.render('chat');
 });
 
