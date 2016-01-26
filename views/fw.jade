@@ -1,12 +1,19 @@
 html
 	head
 		title maps
+		style.
+			body { height: 100%; margin: 0; padding: 0; }
+			html { height: 100%; margin: 0; padding: 0; }
+			#map {  height: 100% }
 	body
-		h1 mapsMaps
+
+		div#map
 
 
 		script(src="https://cdn.socket.io/socket.io-1.2.0.js")
 		script(src="http://code.jquery.com/jquery-1.11.1.js")
+		script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6WtX3nH5hCa9uaFHj04e8BtGwhVCZ4lk&callback=initMap")
+
 		script(type="text/javascript").
 			var socket = io('http://localhost/')
 			loc()
@@ -22,3 +29,10 @@ html
 				var marker = 'http://maps.google.com/maps?q=loc:'+data
 				console.log(marker)
 			})
+			var map
+			function initMap() {
+				map = new google.maps.Map(document.getElementById('map'), {
+					center: {lat: 40.46429031177343, lng: 0.4453591766357512},
+					zoom: 14
+				});
+			}

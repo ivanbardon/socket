@@ -4,8 +4,8 @@ var io = require('socket.io')(http);
 
 app.set('view engine','jade');
 
-app.get('/', function(req, res){
-	res.render('index');
+app.get('/fw', function(req, res){
+	res.render('fw');
 });
 
 app.get('/chat', function(req, res){
