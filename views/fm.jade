@@ -18,8 +18,14 @@ html(lang="es")
 			function loc(){
 				navigator.geolocation.watchPosition(function(pos){
 					var pos = pos.coords
-					var str = pos.latitude+','+pos.longitude
-					socket.emit('send loc', str)
+					var user ={
+						lat: pos.latitude,
+						lng: pos.longitude
+					}
+					socket.emit('send loc', user)
 
 				})
 			}
+			socket.on('print loc', function(data){
+				console.log(data)
+			})
