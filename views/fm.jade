@@ -1,9 +1,13 @@
-html
+html(lang="es")
 	head
 		title followMe
 	body
-
-
+		h1 lo que sea
+		a(href="fw") fw
+		br
+		br
+		br
+		a(href="chat") chat
 
 		script(src="https://cdn.socket.io/socket.io-1.2.0.js")
 		script(src="http://code.jquery.com/jquery-1.11.1.js")
@@ -19,7 +23,3 @@ html
 
 				})
 			}
-			socket.on('print loc', function(data){
-				var marker = 'http://maps.google.com/maps?q=loc:'+data
-				console.log(marker)
-			})

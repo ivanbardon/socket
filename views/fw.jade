@@ -1,4 +1,4 @@
-html
+html(lang="es")
 	head
 		title maps
 		style.
@@ -16,15 +16,6 @@ html
 
 		script(type="text/javascript").
 			var socket = io('http://localhost/')
-			loc()
-			function loc(){
-				navigator.geolocation.watchPosition(function(pos){
-					var pos = pos.coords
-					var str = pos.latitude+','+pos.longitude
-					socket.emit('send loc', str)
-
-				})
-			}
 			socket.on('print loc', function(data){
 				var marker = 'http://maps.google.com/maps?q=loc:'+data
 				console.log(marker)
