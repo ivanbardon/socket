@@ -4,7 +4,7 @@ var io = require('socket.io')(http);
 
 app.set('view engine','jade');
 
-app.get('/fw', function(req, res){
+app.get('/fw/:name', function(req, res){
 	res.render('fw');
 });
 
