@@ -24,7 +24,8 @@ io.on('connection', function(socket){
 		io.emit('chat message', msg);
   });
 });
+app.set('port', process.env.PORT || 3000);
 
-http.listen(3000, function(){
-  console.log('listening on port: 3000');
+http.listen(app.get('port'), function(){
+  console.log('Express server listening on port ' + app.get('port'));
 });
