@@ -16,16 +16,15 @@ html(lang="es")
 		script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6WtX3nH5hCa9uaFHj04e8BtGwhVCZ4lk&callback=initMap")
 
 		script(type="text/javascript").
-			var socket = io('http://localhost/')
+			var socket = io('http://localhost/');
 			socket.on('print loc', function(data){
-				console.log(data)
+				console.log(data);
 				var marker = new google.maps.Marker({
 					position: data,
 					map: map,
 					title: 'user'
 				});
-				map.setCenter(data)
-				map.setZoom(18)
+				map.setCenter(data);
 
 				map.addListener('center_changed', function() {
 					// 10 seconds after the center of the map has changed, pan back to the
@@ -34,7 +33,7 @@ html(lang="es")
 						map.panTo(marker.getPosition());
 					}, 10000);
 				});
-			})
+			});
 			var map;
 			function initMap() {
 				map = new google.maps.Map(document.getElementById('map'), {
