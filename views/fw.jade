@@ -1,43 +1,36 @@
-html(lang="es")
-	head
-		title maps
-		style.
-			body { height: 100%; margin: 0; padding: 0; }
-			html { height: 100%; margin: 0; padding: 0; }
-			#map {  height: 100% }
-			
-	body
+extends ./layout-web
+block titulo
+	title followers
+	style.
+		body { height: 100%; margin: 0; padding: 0; }
+		html { height: 100%; margin: 0; padding: 0; }
+		#map {  height: 100% }
+		
+block contenido
 
-		div#map
+	div#map
 
 
-		script(src="//cdn.socket.io/socket.io-1.2.0.js")
-		script(src="//code.jquery.com/jquery-1.11.1.js")
-		script(async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyD6WtX3nH5hCa9uaFHj04e8BtGwhVCZ4lk&callback=initMap")
+	script(src="//cdn.socket.io/socket.io-1.2.0.js")
+	script(src="//code.jquery.com/jquery-1.11.1.js")
+	script(async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyD6WtX3nH5hCa9uaFHj04e8BtGwhVCZ4lk&callback=initMap")
 
-		script(type="text/javascript").
-			var socket = io('https://infinite-tundra-1079.herokuapp.com');
-			socket.on('print loc', function(data){
-				console.log(data);
-				var marker = new google.maps.Marker({
-					position: data,
-					map: map,
-					title: 'user'
-				});
-				map.setCenter(data);
+	script(type="text/javascript").
+		var socket = io('http://localhost/');
 
-				map.addListener('center_changed', function() {
-					// 10 seconds after the center of the map has changed, pan back to the
-					// marker.
-					window.setTimeout(function() {
-						map.panTo(marker.getPosition());
-					}, 10000);
-				});
+		socket.on('print loc', function(data){
+			console.log(data);
+			var marker = new google.maps.Marker({
+				position: data,
+				map: map,
+				title: 'user'
 			});
-			var map;
-			function initMap() {
-				map = new google.maps.Map(document.getElementById('map'), {
-					center: {lat: 35.638041, lng: 6.646197},
-					zoom: 2
-				});
-			}
+			map.setCenter(data);
+		});
+		var map;
+		function initMap() {
+			map = new google.maps.Map(document.getElementById('map'), {
+				center: {lat: 35.638041, lng: 6.646197},
+				zoom: 2
+			});
+		}

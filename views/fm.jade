@@ -1,31 +1,39 @@
-html(lang="es")
-	head
-		title followMe
-	body
-		h1 lo que sea
-		a(href="fw") fw
-		br
-		br
-		br
-		a(href="chat") chat
+extends ./layout-web
 
-		script(src="//cdn.socket.io/socket.io-1.2.0.js")
-		script(src="//code.jquery.com/jquery-1.11.1.js")
+block titulo
+	title followMe
 
-		script(type="text/javascript").
-			var socket = io('https://infinite-tundra-1079.herokuapp.com')
+block contenido
+	h1 Bienvenido a Mapit
+	small necesitaras activar el gps
+	form(id="form-user" action="")
+		input(id="nick" type="text" placeholder="Escoge un nombre")
+		input(id="btn-submit" type="submit")
+
+	script(src="//cdn.socket.io/socket.io-1.2.0.js")
+	script(src="//code.jquery.com/jquery-1.11.1.js")
+
+	script(type="text/javascript").
+		var socket = io('http://localhost/')
+		//https://infinite-tundra-1079.herokuapp.com
+		$('#form-user').on('submit', function(){
 			loc()
-			function loc(){
-				navigator.geolocation.watchPosition(function(pos){
-					var pos = pos.coords
-					var user ={
+		})
+		function loc(){
+			navigator.geolocation.watchPosition(function(pos){
+				var pos = pos.coords;
+				var nombre = $('#nick').val();
+				var user ={
+					nombre: nombre,
+					position: {
 						lat: pos.latitude,
 						lng: pos.longitude
 					}
-					socket.emit('send loc', user)
+				}
+				socket.emit('send loc', user)
 
-				})
-			}
-			socket.on('print loc', function(data){
-				console.log(data)
 			})
+		}
+		socket.on('print loc', function(data){
+			console.log(data)
+		})
