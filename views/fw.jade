@@ -11,12 +11,12 @@ html(lang="es")
 		div#map
 
 
-		script(src="https://cdn.socket.io/socket.io-1.2.0.js")
-		script(src="http://code.jquery.com/jquery-1.11.1.js")
-		script(async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD6WtX3nH5hCa9uaFHj04e8BtGwhVCZ4lk&callback=initMap")
+		script(src="//cdn.socket.io/socket.io-1.2.0.js")
+		script(src="//code.jquery.com/jquery-1.11.1.js")
+		script(async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyD6WtX3nH5hCa9uaFHj04e8BtGwhVCZ4lk&callback=initMap")
 
 		script(type="text/javascript").
-			var socket = io('http://localhost/');
+			var socket = io('https://infinite-tundra-1079.herokuapp.com');
 			socket.on('print loc', function(data){
 				console.log(data);
 				var marker = new google.maps.Marker({
