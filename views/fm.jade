@@ -4,36 +4,49 @@ block titulo
 	title followMe
 
 block contenido
-	h1 Bienvenido a Mapit
-	small necesitaras activar el gps
+	h1 Bienvenido a followMe
+	br
+	br
 	form(id="form-user" action="")
 		input(id="nick" type="text" placeholder="Escoge un nombre")
-		input(id="btn-submit" type="submit")
+		input(id="enviar" type="button" value="Enviar")
 
 	script(src="//cdn.socket.io/socket.io-1.2.0.js")
 	script(src="//code.jquery.com/jquery-1.11.1.js")
 
 	script(type="text/javascript").
-		var socket = io('http://localhost/')
+		var socket = io('https://infinite-tundra-1079.herokuapp.com');
 		//https://infinite-tundra-1079.herokuapp.com
-		$('#form-user').on('submit', function(){
+		$('#enviar').on('click', function(){
 			loc()
 		})
 		function loc(){
-			navigator.geolocation.watchPosition(function(pos){
-				var pos = pos.coords;
-				var nombre = $('#nick').val();
-				var user ={
-					nombre: nombre,
-					position: {
-						lat: pos.latitude,
-						lng: pos.longitude
-					}
-				}
-				socket.emit('send loc', user)
+			if (navigator.geolocation){
 
-			})
-		}
+				navigator.geolocation.watchPosition(succes, fail, options);
+
+			}
+			else {
+				$('h1').innerHTML("Tu navegador no soporta geolocalización");
+			}
+		};
+		function succes(pos){
+			var cor = pos.coords;
+			var nombre = $('#nick').val();
+			var user ={
+				lat: cor.latitude,
+				lng: cor.longitude
+			}
+			socket.emit('send loc', user);
+		};
+		function fail (err){
+			console.log('ERROR(' + err.code + '): ' + err.message);
+		};
+		options = {
+			enableHighAccuracy: true,
+			timeout: 5000,
+			maximumAge: 0
+		};
 		socket.on('print loc', function(data){
-			console.log(data)
-		})
+			console.log(data);
+		});

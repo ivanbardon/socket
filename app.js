@@ -8,7 +8,7 @@ app.set('view engine','jade');
 app.set('port', process.env.PORT || 3000);
 
 //Rutas
-app.get('/fw/:name', function(req, res){
+app.get('/fw', function(req, res){
 	res.render('fw');
 });
 

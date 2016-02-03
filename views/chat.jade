@@ -18,7 +18,7 @@ html
 		
 
 		script(type="text/javascript").
-			var socket = io('http://localhost/');
+			var socket = io('https://infinite-tundra-1079.herokuapp.com');
 			//https://infinite-tundra-1079.herokuapp.com
 			$('form').submit(function(){
 				socket.emit('chat message', $('#m').val());
