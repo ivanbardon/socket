@@ -5,20 +5,19 @@ html
 	body
 		.container
 			.row
-				ul#messages.col-xs-12
+				ul#messages
 				form(action="")
-					input#m.col-xs-8(autocomplete="off" autofocus)
-					button.btn-info.btn.col-xs-4(type="submit") dic
+					input#m(autocomplete="off" autofocus)
+					button(type="submit") dic
 
 
 
 		script(src="//cdn.socket.io/socket.io-1.2.0.js")
 		script(src="//code.jquery.com/jquery-1.11.1.js")
-		script(src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css")
 		
 
 		script(type="text/javascript").
-			var socket = io('https://infinite-tundra-1079.herokuapp.com');
+			var socket = io('http://localhost/');
 			//https://infinite-tundra-1079.herokuapp.com
 			$('form').submit(function(){
 				socket.emit('chat message', $('#m').val());

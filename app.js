@@ -1,3 +1,9 @@
+// Febrero 2016
+// App para Node.js usando Express
+// La aplicación pretende que puedas realizar streaming de tu geoposición
+// y que otras persona puedan seguirte en un mapa
+
+
 //Require de los modulos
 var app = require('express')();
 var http = require('http').Server(app);
@@ -27,7 +33,8 @@ io.on('connection', function(socket){
 	})
   	socket.on('chat message', function(msg){
 		io.emit('chat message', msg);
-  });
+    });
+    console.log(socket.id)
 });
 
 //Puerto para servir

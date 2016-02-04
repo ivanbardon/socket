@@ -17,7 +17,7 @@ block contenido
 	script(async defer src="//maps.googleapis.com/maps/api/js?key=AIzaSyD6WtX3nH5hCa9uaFHj04e8BtGwhVCZ4lk&callback=initMap")
 
 	script(type="text/javascript").
-		var socket = io('https://infinite-tundra-1079.herokuapp.com');
+		var socket = io('http://localhost/');
 		//https://infinite-tundra-1079.herokuapp.com
 		socket.on('print loc', function(data){
 			console.log(data);
