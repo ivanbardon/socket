@@ -1,3 +1,4 @@
+// Author: Ivan Bardon
 // Febrero 2016
 // App para Node.js usando Express
 // La aplicación pretende que puedas realizar streaming de tu geoposición
@@ -10,7 +11,7 @@ var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
-//Configuracion
+//Configuración
 app.set('view engine','jade');
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
