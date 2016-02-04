@@ -10,19 +10,26 @@ var express = require('express');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
+var bodyParser = require('body-parser');
 
 //Configuración
 app.set('view engine','jade');
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
 
+
 //Rutas
 app.get('/fw', function(req, res){
+	console.log(req.url);
 	res.render('fw');
 });
 
 app.get('/fm', function(req, res){
 	res.render('fm');
+});
+
+app.post('/fm', function(req, res){
+
 });
 
 app.get('/chat', function(req, res){
