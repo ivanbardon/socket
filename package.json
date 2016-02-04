@@ -1,12 +1,12 @@
 {
-  "name": "test",
+  "name": "Mapit",
   "version": "1.0.0",
-  "description": "test for socket connection",
+  "description": "Mapit & followMe",
   "main": "app.js",
   "scripts": {
     
   },
-  "author": "ivan",
+  "author": "Ivan Bardon",
   "license": "ISC",
   "dependencies": {
     "express": "^4.13.3",

@@ -12,6 +12,7 @@ var io = require('socket.io')(http);
 //Configuracion
 app.set('view engine','jade');
 app.set('port', process.env.PORT || 3000);
+app.use(express.static(__dirname + '/public'));
 
 //Rutas
 app.get('/fw', function(req, res){
