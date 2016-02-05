@@ -1,52 +1,65 @@
-extends ./layout-web
+doctype html
+html(lang="es")
+	head
+		meta(charset="utf-8")
+		meta(name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no")
+		title followMe
 
-block titulo
-	title followMe
+	body
+		h1 Bienvenido a followMe
+		br
+		br
+		form(id="form-user" action="/fm" method="POST")
+			input(id="nombre" name="nombre" type="text" placeholder="Escoge un nombre")
+			br
+			br
+			input(id="evento" name="evento" type="text" placeholder="Escoge un nombre de evento")
+			br
+			br
+			input(id="enviar" type="submit" value="Enviar")
+		br
+		input(id="stop" type="button" value="Stop")
 
-block contenido
-	h1 Bienvenido a followMe
-	br
-	br
-	form(id="form-user" action="")
-		input(id="nick" type="text" placeholder="Escoge un nombre")
-		input(id="enviar" type="button" value="Enviar")
+		script(src="//cdn.socket.io/socket.io-1.2.0.js")
+		script(src="//code.jquery.com/jquery-1.11.1.js")
 
-	script(src="//cdn.socket.io/socket.io-1.2.0.js")
-	script(src="//code.jquery.com/jquery-1.11.1.js")
+		script(type="text/javascript").
+			var socket = io('http://localhost/');
+			//https://infinite-tundra-1079.herokuapp.com
+			$('#enviar').on('click', function(){
+				loc()
+			});
 
-	script(type="text/javascript").
-		var socket = io('http://localhost/');
-		//https://infinite-tundra-1079.herokuapp.com
-		$('#enviar').on('click', function(){
-			loc()
-		})
-		function loc(){
-			if (navigator.geolocation){
+			function loc(){
+				if (navigator.geolocation){
 
-				navigator.geolocation.watchPosition(succes, fail, options);
+					navigator.geolocation.watchPosition(succes, fail, options);
 
-			}
-			else {
-				$('h1').innerHTML("Tu navegador no soporta geolocalización");
-			}
-		};
-		function succes(pos){
-			var cor = pos.coords;
-			var nombre = $('#nick').val();
-			var user ={
-				lat: cor.latitude,
-				lng: cor.longitude
-			}
-			socket.emit('send loc', user);
-		};
-		function fail (err){
-			console.log('ERROR(' + err.code + '): ' + err.message);
-		};
-		options = {
-			enableHighAccuracy: true,
-			timeout: 5000,
-			maximumAge: 0
-		};
-		socket.on('print loc', function(data){
-			console.log(data);
-		});
+				}
+				else {
+					$('h1').innerHTML("Tu navegador no soporta geolocalización");
+				}
+			};
+
+			function succes(pos){
+				var cor = pos.coords;
+				var nombre = $('#nick').val();
+				var user ={
+					lat: cor.latitude,
+					lng: cor.longitude
+				}
+				socket.emit('send loc', user);
+			};
+
+			function fail (err){
+				console.log('ERROR(' + err.code + '): ' + err.message);
+			};
+
+			options = {
+				enableHighAccuracy: true,
+				timeout: 5000,
+				maximumAge: 0
+			};
+			socket.on('print loc', function(data){
+				console.log(data);
+			});

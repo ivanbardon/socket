@@ -16,7 +16,8 @@ var bodyParser = require('body-parser');
 app.set('view engine','jade');
 app.set('port', process.env.PORT || 3000);
 app.use(express.static(__dirname + '/public'));
-
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
 //Rutas
 app.get('/fw', function(req, res){
@@ -29,7 +30,8 @@ app.get('/fm', function(req, res){
 });
 
 app.post('/fm', function(req, res){
-
+	console.log(req.body)
+	res.render('chat')
 });
 
 app.get('/chat', function(req, res){
