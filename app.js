@@ -31,14 +31,13 @@ app.get('/fm', function(req, res){
 
 app.post('/fm', function(req, res){
 	console.log(req.body)
-	res.render('chat')
 });
 
 app.get('/chat', function(req, res){
 	res.render('chat');
 });
 
-//Manejo de eventos en los clientes
+//Manejo de eventos para los clientes
 io.on('connection', function(socket){
 	socket.on('send loc', function(data){
 		io.emit('print loc', data)
